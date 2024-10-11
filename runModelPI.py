@@ -86,4 +86,4 @@ for img_file in os.listdir(image_dir1):
         sum += predicted_class
 
 # print the average score of the user
-print(f"Average score: {id2label[sum/count]}")
+print(f"Average score: {id2label[(int)(sum/count)]}")
