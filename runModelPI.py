@@ -64,10 +64,13 @@ id2label = {
 }
 
 # Iterate over your test images
+count = 0
+sum = 0
 for img_file in os.listdir(image_dir1):
     if img_file.endswith(('.png', '.jpg', '.jpeg')):
         img_path = os.path.join(image_dir1, img_file)
         image = Image.open(img_path)
+        count += 1
 
         # Preprocess the image using the ViT processor
         inputs = processor(images=image, return_tensors="pt")
@@ -80,3 +83,7 @@ for img_file in os.listdir(image_dir1):
         # Get the predicted class
         predicted_class = logits.argmax(-1).item()
         print(f"Image: {img_file}, Predicted Class: {id2label[predicted_class]}")
+        sum += predicted_class
+
+# print the average score of the user
+print(f"Average score: {id2label[sum/count]}")
